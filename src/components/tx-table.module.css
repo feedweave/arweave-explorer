@@ -1,0 +1,54 @@
+.container {
+  margin-bottom: 15px;
+}
+.header {
+  display: grid;
+  font-weight: bold;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 100px;
+  margin-bottom: 10px;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.headerColumn {
+  padding: 0 15px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 100px;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 20px 0px;
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.rowColumn {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 15px;
+}
+
+.txContentSnippet {
+  font-family: "Roboto Mono", monospace;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 0 15px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #676767;
+}
+.txContentSnippetHeader {
+  font-family: "Roboto", sans-serif;
+  color: black;
+  text-decoration: underline;
+}
+.snippetLink {
+  text-decoration: none;
+}

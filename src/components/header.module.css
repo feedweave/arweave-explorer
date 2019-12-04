@@ -1,0 +1,20 @@
+.container {
+  width: 1024px;
+  height: 60px;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.container h1 {
+  line-height: 60px;
+  padding: 0 28px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.container a {
+  text-decoration: none;
+}

@@ -1,5 +1,15 @@
 .container {
+  max-width: 1024px;
+  margin: 0 auto;
+  display: block;
+  font-family: "Roboto", sans-serif;
+}
+.children {
   max-width: 829px;
   margin: 0 auto;
   display: block;
+}
+
+.container a {
+  color: black;
 }

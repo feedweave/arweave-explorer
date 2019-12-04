@@ -1,15 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import Tx from "../components/tx"
+// import TxDetail from "../components/tx-detail"
 
 export default ({ pageContext, data }) => {
   const node = data.allArweaveTransaction.edges[0].node
-  return (
-    <Layout>
-      <Tx node={node} />
-    </Layout>
-  )
+  return <Layout>{/* <TxDetail node={node} /> */}</Layout>
 }
 
 export const pageQuery = graphql`

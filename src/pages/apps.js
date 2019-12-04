@@ -2,25 +2,24 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
+import AppList from "../components/app-list"
 
-const AppList = ({ data }) => {
+import appStyles from "./apps.module.css"
+
+const Apps = ({ data }) => {
   const { edges } = data.allArweaveApp
 
   return (
     <Layout>
-      <h1>Arweave apps</h1>
-      <ul>
-        {edges.map(({ node: { name } }) => (
-          <li key={name}>
-            <Link to={`/app/${name}`}>{name}</Link>
-          </li>
-        ))}
-      </ul>
+      <div className={appStyles.container}>
+        <h2>Featured apps</h2>
+        <AppList apps={edges} />
+      </div>
     </Layout>
   )
 }
 
-export default AppList
+export default Apps
 
 export const pageQuery = graphql`
   query {

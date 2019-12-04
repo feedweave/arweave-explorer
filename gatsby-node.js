@@ -31,7 +31,7 @@ exports.sourceNodes = async ({ actions }) => {
   const transactions = await fetchTransactions()
 
   transactions.forEach((tx, i) => {
-    const { id, blockHash, ownerAddress, content, appName } = tx
+    const { id, blockHash, ownerAddress, content, appName, tags } = tx
 
     const transactionNode = {
       id,
@@ -44,6 +44,7 @@ exports.sourceNodes = async ({ actions }) => {
       ownerAddress,
       content,
       appName,
+      tags,
     }
 
     const contentDigest = crypto
