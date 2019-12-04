@@ -7,7 +7,13 @@ const groupBy = require("lodash/groupBy")
 const keys = require("lodash/keys")
 const flatten = require("lodash/flatten")
 
-const APP_NAMES = ["arweave-blog-0.0.1", "scribe-alpha-00"]
+const APP_NAMES = [
+  "ArBoard",
+  "arweave-id",
+  "Academic",
+  "arweave-blog-0.0.1",
+  "permamail",
+]
 
 const fetchAppTransactions = appName =>
   axios.get(`https://gateway.arweave.co/transactions/app-name/${appName}`)
@@ -117,13 +123,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // - /transaction/:id ✅
 
   const appTxListTemplate = path.resolve(
-    "./src/templates/app-tx-list-template.js"
+    "./src/templates/tx-list-app-template.js"
   )
   const appUserTxListTemplate = path.resolve(
-    "./src/templates/app-user-tx-list-template.js"
+    "./src/templates/tx-list-app-user-template.js"
   )
   const userTxListTemplate = path.resolve(
-    "./src/templates/app-user-tx-list-template.js"
+    "./src/templates/tx-list-app-user-template.js"
   )
   const txTemplate = path.resolve("./src/templates/tx-template.js")
 
