@@ -1,3 +1,4 @@
 import React from "react"
+import Layout from "../components/layout"
 
-export default () => <div>Arweave blog!</div>
+export default () => <Layout>Arweave blog!</Layout>

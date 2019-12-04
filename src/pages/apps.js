@@ -1,11 +1,13 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
+import Layout from "../components/layout"
+
 const AppList = ({ data }) => {
   const { edges } = data.allArweaveApp
 
   return (
-    <div>
+    <Layout>
       <h1>Arweave apps</h1>
       <ul>
         {edges.map(({ node: { name } }) => (
@@ -14,7 +16,7 @@ const AppList = ({ data }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </Layout>
   )
 }
 

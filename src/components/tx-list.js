@@ -1,4 +1,5 @@
 import React from "react"
+import Layout from "./layout"
 import Tx from "./tx"
 
 export default props => {
@@ -7,7 +8,7 @@ export default props => {
   const { edges } = data.allArweaveTransaction
 
   return (
-    <div>
+    <Layout>
       <div>App: {appName}</div>
       <ul>
         {edges.map(({ node }) => {
@@ -18,6 +19,6 @@ export default props => {
           )
         })}
       </ul>
-    </div>
+    </Layout>
   )
 }
