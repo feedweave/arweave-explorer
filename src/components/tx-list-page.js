@@ -2,26 +2,49 @@ import React from "react"
 import Layout from "./layout"
 import AppSummary from "./app-summary"
 import TxTable from "./tx-table"
+import Pagination from "./pagination"
 
-const appSummaryPlaceholder = {
-  appDescription: `Discussion board for Arweave.
-
-Arweave ÐApp (decentralized application) as a platform for discussions and knowledge base. Decentralized, impartial, data protection compliant. Managed by users. No backend, no cookies, no worries. Pure Arweave.`,
-  transactionCount: `254`,
-  userCount: `14`,
-  gitHubLink: `https://github.com/sergejmueller/arboard`,
-  appLink: `https://arweave.net/pvmiu4SZKQGWAYjrLWzE_mI70u1-v8zIzQ8WaxIYURk`,
+function PaginationWrapper({ numPages, currentPage, appName }) {
+  return (
+    <Pagination
+      currentPage={currentPage}
+      numPages={numPages}
+      prevLink={
+        currentPage > 2
+          ? `/app/${appName}/${currentPage - 1}`
+          : `/app/${appName}`
+      }
+      nextLink={
+        currentPage < numPages
+          ? `/app/${appName}/${currentPage + 1}`
+          : `/app/${appName}`
+      }
+      firstLink={`/app/${appName}`}
+      lastLink={`/app/${appName}/${numPages}`}
+    />
+  )
 }
 
 export default props => {
-  const { data } = props
+  const { data, pageContext } = props
+  const { numPages, currentPage, appName } = pageContext
   const { edges: transactions } = data.allArweaveTransaction
   const appData = data.allArweaveApp.edges[0].node
 
   return (
     <Layout>
       <AppSummary {...appData} />
+      <PaginationWrapper
+        numPages={numPages}
+        currentPage={currentPage}
+        appName={appName}
+      />
       <TxTable transactions={transactions} />
+      <PaginationWrapper
+        numPages={numPages}
+        currentPage={currentPage}
+        appName={appName}
+      />
     </Layout>
   )
 }

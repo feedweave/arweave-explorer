@@ -4,7 +4,7 @@ import TxList from "../components/tx-list-page"
 export default TxList
 
 export const pageQuery = graphql`
-  query($appName: String) {
+  query($appName: String, $skip: Int!, $limit: Int!) {
     allArweaveApp(filter: { name: { eq: $appName } }) {
       edges {
         node {
@@ -17,7 +17,12 @@ export const pageQuery = graphql`
         }
       }
     }
-    allArweaveTransaction(filter: { appName: { eq: $appName } }) {
+    allArweaveTransaction(
+      sort: { fields: order, order: ASC }
+      filter: { appName: { eq: $appName } }
+      limit: $limit
+      skip: $skip
+    ) {
       edges {
         node {
           id

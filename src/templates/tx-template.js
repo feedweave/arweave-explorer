@@ -9,7 +9,7 @@ export default ({ pageContext, data }) => {
     <Layout>
       <h2>Transaction: {node.id}</h2>
       <TxHeader />
-      <TxDetail node={node} />
+      <TxDetail node={node} expanded={true} />
     </Layout>
   )
 }

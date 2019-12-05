@@ -13,13 +13,18 @@ export function TxHeader() {
     </div>
   )
 }
-export function TxDetail({ node }) {
+export function TxDetail({ node, expanded }) {
   const { content, id, ownerAddress, blockHash, tags } = node
   const filteredTags = tags.filter(
     ({ name, value }) => value.length < 100 && value !== ""
   )
-  const contentSnippet =
-    content.length > 200 ? content.substring(0, 200).concat("...") : content
+  let contentSnippet
+  if (expanded) {
+    contentSnippet = content
+  } else {
+    contentSnippet =
+      content.length > 200 ? content.substring(0, 200).concat("...") : content
+  }
   return (
     <div key={id} className={txDetailStyles.container}>
       <div className={txDetailStyles.row}>
@@ -44,6 +49,14 @@ export function TxDetail({ node }) {
           </div>
         </Link>
         <div className={txDetailStyles.tags}>
+          {expanded ? (
+            <div
+              style={{ marginBottom: 15 }}
+              className={txDetailStyles.txContentSnippetHeader}
+            >
+              Tags:
+            </div>
+          ) : null}
           {filteredTags.map(({ name, value }) => {
             return (
               <div className={txDetailStyles.tag}>

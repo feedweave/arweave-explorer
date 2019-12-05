@@ -79,6 +79,7 @@ exports.sourceNodes = async ({ actions }) => {
       content,
       appName,
       tags,
+      order: i,
     }
 
     const contentDigest = crypto
@@ -168,44 +169,54 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const appTxListTemplate = path.resolve(
     "./src/templates/tx-list-app-template.js"
   )
-  const appUserTxListTemplate = path.resolve(
-    "./src/templates/tx-list-app-user-template.js"
-  )
-  const userTxListTemplate = path.resolve(
-    "./src/templates/tx-list-app-user-template.js"
-  )
+  // const appUserTxListTemplate = path.resolve(
+  //   "./src/templates/tx-list-app-user-template.js"
+  // )
+  // const userTxListTemplate = path.resolve(
+  //   "./src/templates/tx-list-app-user-template.js"
+  // )
   const txTemplate = path.resolve("./src/templates/tx-template.js")
 
   keys(transactionsByAppName).forEach(appName => {
-    createPage({
-      path: `/app/${appName}`,
-      component: appTxListTemplate,
-      context: {
-        appName: appName,
-      },
-    })
-  })
+    const appTxs = transactionsByAppName[appName]
 
-  keys(transactionsByAppNameAndOwner).forEach(appName => {
-    keys(transactionsByAppNameAndOwner[appName]).forEach(owner => {
+    const txsPerPage = 5
+    const numPages = Math.ceil(appTxs.length / txsPerPage)
+    Array.from({ length: numPages }).forEach((_, i) => {
       createPage({
-        path: `/app/${appName}/address/${owner}`,
-        component: appUserTxListTemplate,
+        path: i === 0 ? `/app/${appName}` : `/app/${appName}/${i + 1}`,
+        component: appTxListTemplate,
         context: {
           appName: appName,
-          address: owner,
+          limit: txsPerPage,
+          skip: i * txsPerPage,
+          numPages,
+          currentPage: i + 1,
         },
       })
     })
   })
 
-  keys(transactionsByOwner).forEach(address => {
-    createPage({
-      path: `/address/${address}`,
-      component: userTxListTemplate,
-      context: { address },
-    })
-  })
+  // keys(transactionsByAppNameAndOwner).forEach(appName => {
+  //   keys(transactionsByAppNameAndOwner[appName]).forEach(owner => {
+  //     createPage({
+  //       path: `/app/${appName}/address/${owner}`,
+  //       component: appUserTxListTemplate,
+  //       context: {
+  //         appName: appName,
+  //         address: owner,
+  //       },
+  //     })
+  //   })
+  // })
+
+  // keys(transactionsByOwner).forEach(address => {
+  //   createPage({
+  //     path: `/address/${address}`,
+  //     component: userTxListTemplate,
+  //     context: { address },
+  //   })
+  // })
 
   transactions.forEach(({ node: { id } }) => {
     createPage({

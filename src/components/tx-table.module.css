@@ -49,6 +49,7 @@
 }
 .txContentSnippetText {
   padding: 5px 0;
+  overflow: hidden;
 }
 .snippetLink {
   text-decoration: none;

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.container a {
+  text-decoration: none;
+}
+
+.first,
+.prev,
+.next,
+.last,
+.count {
+  margin-left: 10px;
+  background-color: #f3f3f3;
+  padding: 5px;
+  border-radius: 3px;
+}
