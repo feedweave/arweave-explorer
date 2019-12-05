@@ -33,6 +33,7 @@ export const pageQuery = graphql`
             name
             value
           }
+          fee
         }
       }
     }

@@ -65,7 +65,7 @@ exports.sourceNodes = async ({ actions }) => {
   const transactions = await fetchTransactions()
 
   transactions.forEach((tx, i) => {
-    const { id, blockHash, ownerAddress, content, appName, tags } = tx
+    const { id, blockHash, ownerAddress, content, appName, tags, fee } = tx
 
     const transactionNode = {
       id,
@@ -80,6 +80,7 @@ exports.sourceNodes = async ({ actions }) => {
       appName,
       tags,
       order: i,
+      fee: fee / 1000000000000,
     }
 
     const contentDigest = crypto

@@ -14,7 +14,7 @@ export function TxHeader() {
   )
 }
 export function TxDetail({ node, expanded }) {
-  const { content, id, ownerAddress, blockHash, tags } = node
+  const { content, id, ownerAddress, blockHash, tags, fee } = node
   const filteredTags = tags.filter(
     ({ name, value }) => value.length < 100 && value !== ""
   )
@@ -37,7 +37,7 @@ export function TxDetail({ node, expanded }) {
         <span className={txDetailStyles.rowColumn}>
           <Link to={`/address/${ownerAddress}`}>{ownerAddress}</Link>
         </span>
-        <span className={txDetailStyles.rowColumn}>0.234 AR</span>
+        <span className={txDetailStyles.rowColumn}>{fee.toFixed(6)} AR</span>
       </div>
       <div className={txDetailStyles.body}>
         <Link className={txDetailStyles.snippetLink} to={`/transaction/${id}`}>
