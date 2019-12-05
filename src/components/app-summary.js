@@ -22,7 +22,7 @@ export default function AppSummary(props) {
         </div>
       </p>
       <p>
-        <a href={github}>See code on GitHub</a>
+        <a href={github}>See project on GitHub</a>
       </p>
     </div>
   )
