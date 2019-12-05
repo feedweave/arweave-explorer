@@ -161,21 +161,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     )
   })
 
-  // - /apps ✅
-  // - /app/:app-name ✅
-  // - /app/:app-name/address/:address ✅
-  // - /address/:address ✅
-  // - /transaction/:id ✅
-
   const appTxListTemplate = path.resolve(
     "./src/templates/tx-list-app-template.js"
   )
-  // const appUserTxListTemplate = path.resolve(
-  //   "./src/templates/tx-list-app-user-template.js"
-  // )
-  // const userTxListTemplate = path.resolve(
-  //   "./src/templates/tx-list-app-user-template.js"
-  // )
+
+  const userTxListTemplate = path.resolve(
+    "./src/templates/tx-list-user-template.js"
+  )
+
   const txTemplate = path.resolve("./src/templates/tx-template.js")
 
   keys(transactionsByAppName).forEach(appName => {
@@ -198,26 +191,24 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 
-  // keys(transactionsByAppNameAndOwner).forEach(appName => {
-  //   keys(transactionsByAppNameAndOwner[appName]).forEach(owner => {
-  //     createPage({
-  //       path: `/app/${appName}/address/${owner}`,
-  //       component: appUserTxListTemplate,
-  //       context: {
-  //         appName: appName,
-  //         address: owner,
-  //       },
-  //     })
-  //   })
-  // })
-
-  // keys(transactionsByOwner).forEach(address => {
-  //   createPage({
-  //     path: `/address/${address}`,
-  //     component: userTxListTemplate,
-  //     context: { address },
-  //   })
-  // })
+  keys(transactionsByOwner).forEach(address => {
+    const ownerTxs = transactionsByOwner[address]
+    const txsPerPage = 5
+    const numPages = Math.ceil(ownerTxs.length / txsPerPage)
+    Array.from({ length: numPages }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? `/address/${address}` : `/address/${address}/${i + 1}`,
+        component: userTxListTemplate,
+        context: {
+          address,
+          limit: txsPerPage,
+          skip: i * txsPerPage,
+          numPages,
+          currentPage: i + 1,
+        },
+      })
+    })
+  })
 
   transactions.forEach(({ node: { id } }) => {
     createPage({

@@ -1,7 +1,54 @@
+import React from "react"
 import { graphql } from "gatsby"
-import TxList from "../components/tx-list-page"
+import Layout from "../components/layout"
+import AppSummary from "../components/app-summary"
+import TxTable from "../components/tx-table"
+import Pagination from "../components/pagination"
 
-export default TxList
+function PaginationWrapper({ numPages, currentPage, appName }) {
+  return (
+    <Pagination
+      currentPage={currentPage}
+      numPages={numPages}
+      prevLink={
+        currentPage > 2
+          ? `/app/${appName}/${currentPage - 1}`
+          : `/app/${appName}`
+      }
+      nextLink={
+        currentPage < numPages
+          ? `/app/${appName}/${currentPage + 1}`
+          : `/app/${appName}/${currentPage}`
+      }
+      firstLink={`/app/${appName}`}
+      lastLink={`/app/${appName}/${numPages}`}
+    />
+  )
+}
+
+export default props => {
+  const { data, pageContext } = props
+  const { numPages, currentPage, appName } = pageContext
+  const { edges: transactions } = data.allArweaveTransaction
+  const appData = data.allArweaveApp.edges[0].node
+
+  return (
+    <Layout>
+      <AppSummary {...appData} />
+      <PaginationWrapper
+        numPages={numPages}
+        currentPage={currentPage}
+        appName={appName}
+      />
+      <TxTable transactions={transactions} />
+      <PaginationWrapper
+        numPages={numPages}
+        currentPage={currentPage}
+        appName={appName}
+      />
+    </Layout>
+  )
+}
 
 export const pageQuery = graphql`
   query($appName: String, $skip: Int!, $limit: Int!) {
