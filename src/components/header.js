@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <div className={headerStyles.container}>
       <Link to="/">
-        <h1>Arweave App Data Explorer</h1>
+        <h1>Arweave App Explorer</h1>
       </Link>
     </div>
   )
