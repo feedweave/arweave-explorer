@@ -17,7 +17,7 @@ function PaginationWrapper({ numPages, currentPage, appName }) {
       nextLink={
         currentPage < numPages
           ? `/app/${appName}/${currentPage + 1}`
-          : `/app/${appName}`
+          : `/app/${appName}/${currentPage}`
       }
       firstLink={`/app/${appName}`}
       lastLink={`/app/${appName}/${numPages}`}
