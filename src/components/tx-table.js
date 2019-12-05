@@ -31,7 +31,9 @@ export function TxDetail({ node, expanded }) {
         <span className={txDetailStyles.rowColumn}>
           <Link to={`/transaction/${id}`}>{id}</Link>
         </span>
-        <span className={txDetailStyles.rowColumn}>{blockHash}</span>
+        <span className={txDetailStyles.rowColumn}>
+          {blockHash ? blockHash : "Pending..."}
+        </span>
         <span className={txDetailStyles.rowColumn}>
           <Link to={`/address/${ownerAddress}`}>{ownerAddress}</Link>
         </span>
