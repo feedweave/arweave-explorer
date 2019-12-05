@@ -7,19 +7,53 @@ const groupBy = require("lodash/groupBy")
 const keys = require("lodash/keys")
 const flatten = require("lodash/flatten")
 
-const APP_NAMES = [
-  "ArBoard",
-  "arweave-id",
-  "Academic",
-  "arweave-blog-0.0.1",
-  "permamail",
+const APP_DATA = [
+  {
+    name: "ArBoard",
+    description: `Discussion board for Arweave.
+
+Arweave ÐApp (decentralized application) as a platform for discussions and knowledge base. Decentralized, impartial, data protection compliant. Managed by users. No backend, no cookies, no worries. Pure Arweave.`,
+    github: `https://github.com/sergejmueller/arboard`,
+    link: `https://arweave.net/pvmiu4SZKQGWAYjrLWzE_mI70u1-v8zIzQ8WaxIYURk`,
+  },
+  {
+    name: "arweave-id",
+    description: `An identity registry for Arweave addresses.`,
+    github: `https://github.com/shenwilly/arweaveID/`,
+    link: `https://arweave.net/fGUdNmXFmflBMGI2f9vD7KzsrAc1s1USQgQLgAVT0W0`,
+  },
+  {
+    name: "Academic",
+    description: `High-quality Open Access publishing
+
+Arweave ÐApp for publishing academic articles which are freely available for anyone in the world to use.
+
+Be a part of the academic community, submit publications on ArAcademic under a Creative Commons license or under Open Access, original work under a CC BY-NC 4.0 license.
+
+All submitted publications can be read by everyone. An Arweave Wallet is required for writing articles.`,
+    github: `https://github.com/sergejmueller/aracademic`,
+    link: `https://ss6puabcq3ch.arweave.net/5Yeg3wT4COQL6Bz-tdp9xlmeiwgcOO8NupjpEUDXZ5Y/index.html`,
+  },
+  {
+    name: "arweave-blog-0.0.1",
+    description: `A blogging platform built on arweave`,
+    github: `coming soon`,
+    link: `coming soon`,
+  },
+  {
+    name: "permamail",
+    description:
+      "Weavemail is a prototype decentralised mail system. It runs on the Arweave network, so its messages and the web app itself are permanent and always available on the permaweb.",
+    github: `https://github.com/ArweaveTeam/weavemail`,
+    link: "https://weavemail.app/",
+  },
 ]
 
 const fetchAppTransactions = appName =>
   axios.get(`https://gateway.arweave.co/transactions/app-name/${appName}`)
 
 const fetchTransactions = async () => {
-  const promises = APP_NAMES.map(name => fetchAppTransactions(name))
+  const promises = APP_DATA.map(({ name }) => fetchAppTransactions(name))
   const results = await Promise.all(promises)
   const dataResults = results.map(result => result.data)
   return flatten(dataResults)
@@ -56,7 +90,10 @@ exports.sourceNodes = async ({ actions }) => {
     createNode(transactionNode)
   })
 
-  APP_NAMES.forEach((name, i) => {
+  const txByApp = groupBy(transactions, "appName")
+
+  APP_DATA.forEach((app, i) => {
+    const { name, description, github, link } = app
     const appNode = {
       id: name,
       parent: `__SOURCE__`,
@@ -65,6 +102,11 @@ exports.sourceNodes = async ({ actions }) => {
       },
       children: [],
       name,
+      description,
+      github,
+      link,
+      txCount: txByApp[name].length,
+      userCount: keys(groupBy(txByApp[name], "ownerAddress")).length,
     }
 
     const contentDigest = crypto

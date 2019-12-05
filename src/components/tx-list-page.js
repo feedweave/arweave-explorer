@@ -14,14 +14,14 @@ Arweave ÐApp (decentralized application) as a platform for discussions and know
 }
 
 export default props => {
-  const { pageContext, data } = props
-  const { appName } = pageContext
-  const { edges } = data.allArweaveTransaction
+  const { data } = props
+  const { edges: transactions } = data.allArweaveTransaction
+  const appData = data.allArweaveApp.edges[0].node
 
   return (
     <Layout>
-      <AppSummary appName={appName} {...appSummaryPlaceholder} />
-      <TxTable transactions={edges} />
+      <AppSummary {...appData} />
+      <TxTable transactions={transactions} />
     </Layout>
   )
 }

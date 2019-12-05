@@ -6,6 +6,9 @@
   flex-wrap: wrap;
   margin: 0 -24px;
 }
+.container a {
+  text-decoration: none;
+}
 
 .itemContainer {
   flex: 1;
@@ -17,4 +20,13 @@
   border-radius: 5px;
   padding: 12px 18px;
   margin: 0 24px 37px;
+}
+
+.itemName {
+  text-decoration: underline;
+}
+
+.itemData {
+  font-size: 14px;
+  margin-top: 10px;
 }

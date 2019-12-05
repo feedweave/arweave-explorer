@@ -24,10 +24,11 @@ export default Apps
 export const pageQuery = graphql`
   query {
     allArweaveApp {
-      totalCount
       edges {
         node {
           name
+          txCount
+          userCount
         }
       }
     }

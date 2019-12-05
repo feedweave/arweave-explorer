@@ -13,6 +13,10 @@ export const pageQuery = graphql`
           ownerAddress
           blockHash
           content
+          tags {
+            name
+            value
+          }
         }
       }
     }

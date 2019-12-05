@@ -5,14 +5,29 @@ export default TxList
 
 export const pageQuery = graphql`
   query($appName: String) {
+    allArweaveApp(filter: { name: { eq: $appName } }) {
+      edges {
+        node {
+          txCount
+          userCount
+          name
+          github
+          link
+          description
+        }
+      }
+    }
     allArweaveTransaction(filter: { appName: { eq: $appName } }) {
-      totalCount
       edges {
         node {
           id
           ownerAddress
           blockHash
           content
+          tags {
+            name
+            value
+          }
         }
       }
     }

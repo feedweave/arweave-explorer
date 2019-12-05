@@ -1,5 +1,11 @@
 .container {
   margin-bottom: 15px;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 0 15px;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  border-radius: 5px;
 }
 .header {
   display: grid;
@@ -16,14 +22,11 @@
 .row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 100px;
-  border: 1px solid #cccccc;
-  box-sizing: border-box;
-  border-radius: 5px;
-  padding: 20px 0px;
+  padding: 10px 0px;
+  font-size: 14px;
   margin-left: -15px;
   margin-right: -15px;
-  margin-bottom: 5px;
-  font-size: 14px;
+  border-bottom: 1px solid #ccc;
 }
 .rowColumn {
   text-overflow: ellipsis;
@@ -34,12 +37,6 @@
 
 .txContentSnippet {
   font-family: "Roboto Mono", monospace;
-  border: 1px solid #cccccc;
-  box-sizing: border-box;
-  border-radius: 5px;
-  margin-left: -15px;
-  margin-right: -15px;
-  padding: 0 15px;
   font-size: 12px;
   line-height: 14px;
   color: #676767;
@@ -48,7 +45,34 @@
   font-family: "Roboto", sans-serif;
   color: black;
   text-decoration: underline;
+  font-size: 14px;
+}
+.txContentSnippetText {
+  padding: 5px 0;
 }
 .snippetLink {
   text-decoration: none;
+}
+
+.body {
+  padding: 10px 0;
+}
+
+.tags {
+  font-size: 12px;
+}
+.tag {
+  margin-bottom: 5px;
+  display: inline-block;
+  margin-right: 10px;
+  background-color: #f3f3f3;
+  padding: 5px;
+  border-radius: 3px;
+}
+.tag span {
+  display: inline-block;
+}
+
+.tagValue {
+  margin-left: 5px;
 }
