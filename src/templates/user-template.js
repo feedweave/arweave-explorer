@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import TxTable from "../components/tx-table"
 import Pagination from "../components/pagination"
@@ -27,11 +27,28 @@ function PaginationWrapper({ numPages, currentPage, address }) {
 
 export default props => {
   const { data, pageContext } = props
-  const { numPages, currentPage, address } = pageContext
-  const { edges: transactions } = data.allArweaveTransaction
+  const {
+    numPages,
+    currentPage,
+    address,
+    ownerStats: { topApps, arweaveId },
+  } = pageContext
+  const { edges: transactions, totalCount } = data.allArweaveTransaction
 
   return (
     <Layout>
+      <h2>User address: {address}</h2>
+      {arweaveId ? <h2>Arweave ID: {arweaveId}</h2> : null}
+      <div>Transactions: {totalCount}</div>
+      <div>Most active in:</div>
+      <ol>
+        {topApps.map(({ appName, txCount }) => (
+          <li>
+            <Link to={`/app/${appName}`}>{appName}</Link>: {txCount}{" "}
+            transactions
+          </li>
+        ))}
+      </ol>
       <PaginationWrapper
         numPages={numPages}
         currentPage={currentPage}

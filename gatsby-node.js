@@ -59,6 +59,32 @@ const fetchTransactions = async () => {
   return flatten(dataResults)
 }
 
+function ownerStats(ownerTxs) {
+  const txsByAppName = groupBy(ownerTxs, "appName")
+  const formatted = keys(txsByAppName).map(key => {
+    return { appName: key, txs: txsByAppName[key] }
+  })
+  const sorted = formatted.sort((a, b) => {
+    return b.txs.length - a.txs.length
+  })
+
+  const arweaveIdTxs = ownerTxs.filter(tx => tx.appName === "arweave-id")
+
+  const arweaveIdNameTxs = arweaveIdTxs.filter(
+    ({ tags }) =>
+      tags.filter(({ name, value }) => name === "Type" && value === "name")
+        .length > 0
+  )
+  const arweaveId = arweaveIdNameTxs[0] && arweaveIdNameTxs[0].content
+
+  return {
+    topApps: sorted
+      .slice(0, 3)
+      .map(({ appName, txs }) => ({ appName, txCount: txs.length })),
+    arweaveId,
+  }
+}
+
 exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions
 
@@ -137,6 +163,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               ownerAddress
               appName
               content
+              tags {
+                name
+                value
+              }
             }
           }
         }
@@ -201,6 +231,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           skip: i * txsPerPage,
           numPages,
           currentPage: i + 1,
+          ownerStats: ownerStats(ownerTxs.map(({ node }) => node)),
         },
       })
     })
