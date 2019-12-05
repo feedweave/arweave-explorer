@@ -161,13 +161,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     )
   })
 
-  const appTxListTemplate = path.resolve(
-    "./src/templates/tx-list-app-template.js"
-  )
+  const appTxListTemplate = path.resolve("./src/templates/app-template.js")
 
-  const userTxListTemplate = path.resolve(
-    "./src/templates/tx-list-user-template.js"
-  )
+  const userTxListTemplate = path.resolve("./src/templates/user-template.js")
 
   const txTemplate = path.resolve("./src/templates/tx-template.js")
 
