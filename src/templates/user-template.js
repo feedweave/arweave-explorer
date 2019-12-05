@@ -40,7 +40,7 @@ export default props => {
       <h2>User address: {address}</h2>
       {arweaveId ? <h2>Arweave ID: {arweaveId}</h2> : null}
       <div>Transactions: {totalCount}</div>
-      <div>Most active in:</div>
+      <div>Most active apps:</div>
       <ol>
         {topApps.map(({ appName, txCount }) => (
           <li>
