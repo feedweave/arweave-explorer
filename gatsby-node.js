@@ -47,6 +47,12 @@ All submitted publications can be read by everyone. An Arweave Wallet is require
     github: `https://github.com/ArweaveTeam/weavemail`,
     link: "https://weavemail.app/",
   },
+  {
+    name: "arweave-social",
+    description: `A social graph built on arweave`,
+    github: `coming soon`,
+    link: `coming soon`,
+  },
 ]
 
 const fetchAppTransactions = appName =>
