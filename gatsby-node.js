@@ -49,7 +49,7 @@ All submitted publications can be read by everyone. An Arweave Wallet is require
   },
   {
     name: "social-graph",
-    description: `A social graph built on arweave`,
+    description: `A social graph built on arweave. Allows one address to follow another address, optionally constraining the connection to an App via a filter.`,
     github: `coming soon`,
     link: `coming soon`,
   },
