@@ -48,7 +48,7 @@ All submitted publications can be read by everyone. An Arweave Wallet is require
     link: "https://weavemail.app/",
   },
   {
-    name: "arweave-social",
+    name: "social-graph",
     description: `A social graph built on arweave`,
     github: `coming soon`,
     link: `coming soon`,
@@ -56,12 +56,12 @@ All submitted publications can be read by everyone. An Arweave Wallet is require
 ]
 
 const fetchAppTransactions = appName =>
-  axios.get(`https://gateway.arweave.co/transactions/app-name/${appName}`)
+  axios.get(`https://gateway.arweave.co/transactions?app-name=${appName}`)
 
 const fetchTransactions = async () => {
   const promises = APP_DATA.map(({ name }) => fetchAppTransactions(name))
   const results = await Promise.all(promises)
-  const dataResults = results.map(result => result.data)
+  const dataResults = results.map(result => result.data.transactions)
   return flatten(dataResults)
 }
 
