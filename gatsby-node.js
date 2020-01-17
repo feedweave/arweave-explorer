@@ -53,6 +53,12 @@ All submitted publications can be read by everyone. An Arweave Wallet is require
     github: `coming soon`,
     link: `coming soon`,
   },
+  {
+    name: "identity-link",
+    description: `Link an existing identity provider (e.g. Twitter) to your Arweave address.`,
+    github: `coming soon`,
+    link: `coming soon`,
+  },
 ]
 
 const fetchAppTransactions = appName =>
