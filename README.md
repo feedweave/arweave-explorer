@@ -1,4 +1,5 @@
 # arweave-explorer
+Deployed at https://explorer.arweave.co/
 
 A block explorer for Arweave apps. Filters blockchain transaction by `App-Name` tag and compute somes simple analytics for each.
 
