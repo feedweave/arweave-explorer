@@ -35,10 +35,10 @@ All submitted publications can be read by everyone. An Arweave Wallet is require
     link: `https://ss6puabcq3ch.arweave.net/5Yeg3wT4COQL6Bz-tdp9xlmeiwgcOO8NupjpEUDXZ5Y/index.html`,
   },
   {
-    name: "arweave-blog-0.0.1",
-    description: `A blogging platform built on arweave`,
-    github: `coming soon`,
-    link: `coming soon`,
+    name: "FEEDweave",
+    description: `A decentralized social media application built on Arweave.`,
+    github: `https://github.com/denisnazarov/feedweave-ui`,
+    link: `https://feedweave.co/`,
   },
   {
     name: "permamail",
