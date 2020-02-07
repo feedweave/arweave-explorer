@@ -59,6 +59,12 @@ All submitted publications can be read by everyone. An Arweave Wallet is require
     github: `coming soon`,
     link: `coming soon`,
   },
+  {
+    name: "neighbour-tweet",
+    description: `Twitter-style-location-based permaweb platform`,
+    github: `coming soon`,
+    link: `coming soon`,
+  },
 ]
 
 const fetchAppTransactions = appName =>
