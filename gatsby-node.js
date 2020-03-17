@@ -65,6 +65,12 @@ All submitted publications can be read by everyone. An Arweave Wallet is require
     github: `coming soon`,
     link: `coming soon`,
   },
+  {
+    name: "transaction-comment",
+    description: `Post a comment on a transaction`,
+    github: `coming soon`,
+    link: `coming soon`,
+  },
 ]
 
 const fetchAppTransactions = appName =>
