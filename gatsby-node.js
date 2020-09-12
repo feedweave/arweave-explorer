@@ -71,6 +71,12 @@ All submitted publications can be read by everyone. An Arweave Wallet is require
     github: `coming soon`,
     link: `coming soon`,
   },
+  {
+    name: "Gitstamp",
+    description: `Timestamp your Git commits using the Arweave permaweb.`,
+    github: `https://github.com/artob/gitstamp.dev`,
+    link: `https://gitstamp.dev`,
+  },
 ]
 
 const fetchAppTransactions = appName =>
